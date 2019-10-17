@@ -32,14 +32,17 @@ namespace Sangus.WebApi
             services.AddSangusServices();
             services.AddControllers();
 
-            services.AddSingleton(typeof(IRepository<Cliente>), typeof(Repository<Cliente>));
 
-           // services.AddSingleton(typeof(ClientesService), typeof(ClientesService));
+            // services.AddSingleton(typeof(ClientesService), typeof(ClientesService));
 
-            
+            services.AddSingleton<Repository<Cliente>>();
+
             services.AddDbContext<SangusDbContext>(options =>
           options.UseInMemoryDatabase(   Configuration.GetConnectionString("DefaultConnection")));
-            
+
+
+         //   services.AddSingleton(typeof(IRepository<Cliente>), typeof(Repository<Cliente>));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

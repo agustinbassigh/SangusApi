@@ -11,7 +11,7 @@ namespace Sangus.Services
     {
         private readonly IRepository<Cliente> clientesRepository;
 
-        public ClientesService(IRepository<Cliente> _clientesRepository)
+        public ClientesService()
         {
             clientesRepository = _clientesRepository;
         }

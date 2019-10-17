@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Sangus.Data;
 using Sangus.Model.Clientes;
 using Sangus.Services;
@@ -16,9 +17,16 @@ namespace Sangus.WebApi.Controllers
     {
         private readonly ClientesService _clientesService;
 
-        public ClientesController(Repository<Cliente> repository)
+        public ClientesController()
         {
             // ClientesService clientesService
+
+            DbContextOptionsBuilder<SangusDbContext>   optionsBuilder = new DbContextOptionsBuilder<SangusDbContext>();
+            optionsBuilder.UseInMemoryDatabase("connection string here");
+ 
+            SangusDbContext sangusDbContext = new SangusDbContext( optionsBuilder.Options);
+
+            Repository<Cliente> repository = new Repository<Cliente>(sangusDbContext);
             _clientesService = new ClientesService(repository);
         }
 
